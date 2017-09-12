@@ -1,4 +1,4 @@
-package com.example;
+package com.rajatgoyal;
 
 import java.util.Random;
 
@@ -25,10 +25,6 @@ public class Joke {
 
     public String getRandomJoke() {
         return jokes[random.nextInt(jokes.length)];
-    }
-
-    public String[] getJokes() {
-        return jokes;
     }
 
 }

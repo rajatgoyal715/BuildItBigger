@@ -17,6 +17,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        free {
+            buildConfigField "String", "AdId", '"ca-app-pub-7063547617332041/9810518753"'
+            buildConfigField "String", "googleEndpointsUrl", '"https://build-it-bigger-179616.appspot.com/_ah/api/"'
+            resValue "string", "AdId", '"ca-app-pub-7063547617332041/9810518753R"'
+
+            applicationId "com.rajatgoyal.builditbigger.free"
+        }
+        paid {
+            applicationId "com.rajatgoyal.builditbigger.paid"
+        }
+    }
 }
 
 dependencies {
@@ -24,12 +36,21 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
-    compile 'com.google.android.gms:play-services-ads:11.2.0'
     compile project(":jokelib")
     compile project(":jokelibrary")
 
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.google.code.findbugs:jsr305:2.0.1'
     testCompile 'junit:junit:4.12'
+    compile 'com.google.android.gms:play-services-ads:11.2.0'
+    compile project(path: ':backend', configuration: 'android-endpoints')
+
+    compile('com.google.api-client:google-api-client:1.22.0') {
+        exclude module: 'httpclient' //by artifact name
+        exclude group: 'org.apache.httpcomponents' //by group
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient' //by both name and group
+    }
+    // exclude group: 'com.google.http-client', name: 'google-http-client-android', version: '1.22.0'
 }
