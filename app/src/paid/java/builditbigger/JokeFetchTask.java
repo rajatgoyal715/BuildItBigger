@@ -7,7 +7,6 @@ import android.util.Pair;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.rajatgoyal.builditbigger.BuildConfig;
