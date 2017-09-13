@@ -1,6 +1,5 @@
 package com.rajatgoyal.builditbigger;
 
-import android.support.test.InstrumentationRegistry;
 import android.util.Log;
 
 import org.junit.Test;
@@ -18,17 +17,18 @@ public class JokeFetchTaskTest {
 
     @Test
     public void checkIfJokeFetchTaskReturnsEmptyString() {
-        JokeFetchTask jokeFetchTask = new JokeFetchTask(InstrumentationRegistry.getContext(), null);
+        JokeFetchTask jokeFetchTask = new JokeFetchTask() {
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+
+                String joke = s;
+                Log.d(TAG, "checkIfJokeFetchTaskReturnsEmptyString: " + joke);
+
+                assertNotNull(joke);
+                assertTrue(joke.length() > 0);
+            }
+        };
         jokeFetchTask.execute();
-
-        try {
-            String joke = jokeFetchTask.get();
-            Log.d(TAG, "checkIfJokeFetchTaskReturnsEmptyString: " + joke);
-
-            assertNotNull(joke);
-            assertTrue(joke.length() > 0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

@@ -55,7 +55,6 @@ public class JokeFetchTask extends AsyncTask<Pair<Context, String>, Void, String
         try {
             return jokesApi.fetchJoke(new JokeBean()).execute().getJoke();
         } catch (IOException e) {
-            Toast.makeText(context, "Error!!!", Toast.LENGTH_SHORT).show();
             return e.getMessage();
         }
     }

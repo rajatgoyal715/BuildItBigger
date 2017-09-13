@@ -20,29 +20,12 @@ import java.io.IOException;
  * Created by rajat on 10/9/17.
  */
 
-public class JokeFetchTask extends AsyncTask<Pair<Context, String>, Void, String> {
+public class JokeFetchTask extends AsyncTask<Void, Void, String> {
 
     private static JokesApi jokesApi;
-    private Context context;
-    private ProgressBar progressBar;
-
-    private String jokeString;
-
-    public JokeFetchTask(Context context, ProgressBar progressBar) {
-        this.context = context;
-        this.progressBar = progressBar;
-    }
 
     @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        if (progressBar != null) {
-            progressBar.setVisibility(View.VISIBLE);
-        }
-    }
-
-    @Override
-    protected String doInBackground(Pair<Context, String>... params) {
+    protected String doInBackground(Void... params) {
         if (jokesApi == null) {
             JokesApi.Builder builder = new JokesApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
@@ -53,7 +36,6 @@ public class JokeFetchTask extends AsyncTask<Pair<Context, String>, Void, String
         try {
             return jokesApi.fetchJoke(new JokeBean()).execute().getJoke();
         } catch (IOException e) {
-            Toast.makeText(context, "Error!!!", Toast.LENGTH_SHORT).show();
             return e.getMessage();
         }
     }
