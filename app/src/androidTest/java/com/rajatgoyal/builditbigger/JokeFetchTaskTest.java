@@ -4,6 +4,8 @@ import android.util.Log;
 
 import org.junit.Test;
 
+import builditbigger.JokeFetchTask;
+
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
@@ -17,7 +19,7 @@ public class JokeFetchTaskTest {
 
     @Test
     public void checkIfJokeFetchTaskReturnsEmptyString() {
-        JokeFetchTask jokeFetchTask = new JokeFetchTask() {
+        JokeFetchTask jokeFetchTask = new JokeFetchTask(null, null) {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);

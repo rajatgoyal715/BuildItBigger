@@ -22,7 +22,7 @@ import java.io.IOException;
  * Created by rajat on 10/9/17.
  */
 
-public class JokeFetchTask extends AsyncTask<Pair<Context, String>, Void, String> {
+public class JokeFetchTask extends AsyncTask<Void, Void, String> {
 
     private static JokesApi jokesApi;
     private Context context;
@@ -44,7 +44,7 @@ public class JokeFetchTask extends AsyncTask<Pair<Context, String>, Void, String
     }
 
     @Override
-    protected String doInBackground(Pair<Context, String>... params) {
+    protected String doInBackground(Void... params) {
         if (jokesApi == null) {
             JokesApi.Builder builder = new JokesApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
