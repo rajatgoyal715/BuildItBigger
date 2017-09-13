@@ -66,7 +66,9 @@ public class JokeFetchTask extends AsyncTask<Void, Void, String> {
 
         hideProgressBar();
 
-        startJokeDisplayActivity();
+        if (context != null) {
+            startJokeDisplayActivity();
+        }
     }
 
     private void hideProgressBar() {

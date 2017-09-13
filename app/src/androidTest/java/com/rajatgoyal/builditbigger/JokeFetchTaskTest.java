@@ -19,18 +19,17 @@ public class JokeFetchTaskTest {
 
     @Test
     public void checkIfJokeFetchTaskReturnsEmptyString() {
-        JokeFetchTask jokeFetchTask = new JokeFetchTask(null, null) {
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-
-                String joke = s;
-                Log.d(TAG, "checkIfJokeFetchTaskReturnsEmptyString: " + joke);
-
-                assertNotNull(joke);
-                assertTrue(joke.length() > 0);
-            }
-        };
+        JokeFetchTask jokeFetchTask = new JokeFetchTask(null, null);
         jokeFetchTask.execute();
+
+        try {
+            String joke = jokeFetchTask.get();
+            Log.d(TAG, "checkIfJokeFetchTaskReturnsEmptyString: " + joke);
+
+            assertNotNull(joke);
+            assertTrue(joke.length() > 0);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }
