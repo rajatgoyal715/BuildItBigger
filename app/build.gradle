@@ -26,6 +26,8 @@ android {
             applicationId "com.rajatgoyal.builditbigger.free"
         }
         paid {
+            buildConfigField "String", "googleEndpointsUrl", '"https://build-it-bigger-179616.appspot.com/_ah/api/"'
+
             applicationId "com.rajatgoyal.builditbigger.paid"
         }
     }
@@ -47,10 +49,11 @@ dependencies {
     compile 'com.google.android.gms:play-services-ads:11.2.0'
     compile project(path: ':backend', configuration: 'android-endpoints')
 
-    compile('com.google.api-client:google-api-client:1.22.0') {
-        exclude module: 'httpclient' //by artifact name
-        exclude group: 'org.apache.httpcomponents' //by group
-        exclude group: 'org.apache.httpcomponents', module: 'httpclient' //by both name and group
-    }
-    // exclude group: 'com.google.http-client', name: 'google-http-client-android', version: '1.22.0'
+    compile 'com.google.api-client:google-api-client:1.22.0'
+//    compile('com.google.api-client:google-api-client:1.22.0') {
+//        exclude module: 'httpclient' //by artifact name
+//        exclude group: 'org.apache.httpcomponents' //by group
+//        exclude group: 'org.apache.httpcomponents', module: 'httpclient' //by both name and group
+//    }
+    compile group: 'com.google.http-client', name: 'google-http-client-android', version: '1.22.0'
 }

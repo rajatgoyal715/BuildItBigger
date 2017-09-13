@@ -1,4 +1,4 @@
-package com.rajatgoyal.builditbigger;
+package builditbigger;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,10 +6,11 @@ import android.os.AsyncTask;
 import android.util.Pair;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
+import com.rajatgoyal.builditbigger.BuildConfig;
 import com.rajatgoyal.builditbigger.backend.jokesApi.JokesApi;
 import com.rajatgoyal.builditbigger.backend.jokesApi.model.JokeBean;
 import com.rajatgoyal.jokelibrary.DisplayJokeActivity;
@@ -53,8 +54,30 @@ public class JokeFetchTask extends AsyncTask<Pair<Context, String>, Void, String
         try {
             return jokesApi.fetchJoke(new JokeBean()).execute().getJoke();
         } catch (IOException e) {
-            Toast.makeText(context, "Error!!!", Toast.LENGTH_SHORT).show();
             return e.getMessage();
         }
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+
+        hideProgressBar();
+        jokeString = s;
+
+        startJokeDisplayActivity();
+    }
+
+    private void hideProgressBar() {
+        if (progressBar != null) {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    private void startJokeDisplayActivity() {
+        Intent intent = new Intent(context, DisplayJokeActivity.class);
+        intent.putExtra("joke", jokeString);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 }
